@@ -1,0 +1,15 @@
+# Env files
+.devcontainer/.env
+
+# DB volume
+.devcontainer/mariadb/data/db/mysql/*
+!*.devcontainer/mariadb/data/db/mysql/readme.md
+
+# SSL Certificates
+.devcontainer/webserver/config/etc/ssl/*.pem
+.devcontainer/webserver/config/etc/ssl/*.key
+
+# NGINX Logs
+.devcontainer/webserver/logs/*
+!*.devcontainer/webserver/logs/readme.md 
+
