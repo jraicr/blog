@@ -15,3 +15,5 @@
 
 
 blog_webapp/tmp/
+
+blog_webapp/.env.hostinger
