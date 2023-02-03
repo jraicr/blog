@@ -13,3 +13,5 @@
 .devcontainer/webserver/logs/*
 !*.devcontainer/webserver/logs/readme.md 
 
+
+blog_webapp/tmp/
