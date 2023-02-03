@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Rai Blog')
+@section('title', 'Code Rai')
 
 @section('content_header')
     <h1>Code Rai</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Bienvenido al panel de control del administrador.</p>
 @stop
 
 @section('css')
@@ -15,5 +15,5 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script> console.log('Hola!'); </script>
 @stop
