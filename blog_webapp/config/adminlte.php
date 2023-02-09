@@ -150,7 +150,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -312,22 +312,22 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Dashboard',
+            'url'         => 'admin/',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'ADMINISTRADOR'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Categorías',
+            'route'  => 'admin.categories.index',
+            'icon' => 'fab fa-fw fa-buffer',
+            'active' => ['admin/categories*']
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Etiquetas',
+            'route'  => 'admin.tags.index',
+            'icon' => 'far fa-fw fa-bookmark',
+            'active' => ['admin/tags*']
         ],
         [
             'text'    => 'multilevel',

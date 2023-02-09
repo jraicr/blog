@@ -9,10 +9,16 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'slug', 'color'];
      /**
       * Relación muchos a muchos de la tabla posts
       */
       public function posts() {
         return $this->belongsToMany(Post::class);
+     }
+
+
+     public function getRouteKeyName() {
+        return "slug";
      }
 }
