@@ -37,10 +37,15 @@
                 {{-- Logotipo --}}
                 <a href="/" class="flex items-center flex-shrink-0">
                     <img class="block w-auto h-8 lg:hidden"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                        src="{{Storage::url('pics/logo-rai.svg')}}" alt="Rai">
                     <img class="hidden w-auto h-8 lg:block"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                        src="{{Storage::url('pics/logo-rai.svg')}}" alt="Rai">
+
+                   <p class="ml-2 text-lg text-white">Code Rai</p>
+
                 </a>
+
+
 
                 {{-- Menu lg --}}
                 <div class="hidden sm:ml-6 sm:block">
