@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off']) !!}
+            {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off', 'files' => true]) !!}
 
             {!! Form::hidden('user_id', auth()->user()->id) !!}
 
@@ -82,6 +82,33 @@
                 @enderror
             </div>
 
+            <div class="mb-3 row">
+                <div class="col">
+                    <div class="image-wrapper">
+                        <img id="picture"
+                            src="https://cdn.pixabay.com/photo/2017/10/11/14/41/agriculture-2841234_960_720.jpg"
+                            alt="">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        {!! Form::label('file', 'imagem que se mostraré en el post') !!}
+                        {!! Form::file('file', ['class' => 'form-control-file', 'accept' => 'image/*']) !!}
+
+                        @error('file')
+                            <span class="text-danger">{{ $message }} </span>
+                        @enderror
+                    </div>
+
+
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati distinctio amet est. Cupiditate
+                        sapiente praesentium vero deserunt quis sint aspernatur possimus laboriosam perferendis, eveniet,
+                        laborum repellendus placeat doloribus natus provident.</p>
+                </div>
+            </div>
+
             <div class="form-group">
                 {!! Form::label('extract', 'Extracto') !!}
                 {!! Form::textarea('extract', null, ['class' => 'form-control']) !!}
@@ -108,14 +135,39 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        .image-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+        }
+
+        .image-wrapper img {
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
 @stop
 
 @section('js')
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
     <script>
-        setupSlugify("#name", "#slug");
+        // Previsualización de imagen
+        document.getElementById("file").addEventListener('change', changeImage);
 
+        function changeImage(event) {
+            let file = event.target.files[0];
+            let reader = new FileReader();
+
+            reader.onload = (event) => {
+                document.getElementById("picture").setAttribute('src', event.target.result)
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // CKEditor en los textarea de extracto y body
         ClassicEditor
             .create(document.querySelector('#extract'))
             .catch(error => {
@@ -127,6 +179,10 @@
             .catch(error => {
                 console.error(error);
             });
+
+
+        // "Slugifica" del título del post
+        setupSlugify("#name", "#slug");
 
         function setupSlugify(inputFieldID, slugFieldID) {
             let inputElements = getInputNodesFromID(inputFieldID, slugFieldID); // Obtenemos nodos del input

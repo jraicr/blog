@@ -32,7 +32,8 @@ class StorePostRequest extends FormRequest
         $rules = [
             'name' => 'required',
             'slug' => 'required|unique:posts', // Unico en la tabla posts
-            'status' => 'required|in:1,2' // Solo puede tomar valores 1  y2
+            'status' => 'required|in:1,2', // Solo puede tomar valores 1  y2
+            'file' => 'image'
         ];
 
         if ($this->status == 2) {

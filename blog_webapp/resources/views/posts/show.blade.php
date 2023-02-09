@@ -3,19 +3,25 @@
         <h1 class="text-4xl font-bold text-gray-600"> {{ $post->name }} </h1>
 
         <div class="mb-2 text-lg text-gray-500">
-            {{ $post->extract }}
+            {!!$post->extract!!}
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {{-- Contenido principal --}}
             <div class="md:col-span-2">
                 <figure>
-                    <img class="object-cover object-center w-full h-80" src="{{ Storage::url($post->image->url) }}"
-                        alt="{{ $post->name }}">
+                   @if ($post->image)
+                   <img class="object-cover object-center w-full h-80" src="{{ Storage::url($post->image->url) }}"
+                   alt="{{ $post->name }}">
+                       @else
+                       <img class="object-cover object-center w-full h-80" src="https://cdn.pixabay.com/photo/2017/10/11/14/41/agriculture-2841234_960_720.jpg"
+                       alt="{{ $post->name }}">
+
+                   @endif
                 </figure>
 
                 <div class="mt-4 text-base text-gray-500">
-                    {{ $post->body }}
+                    {!!$post->body!!}
                 </div>
             </div>
 
@@ -35,7 +41,7 @@
                                         alt="{{ $relatedPost->name }}">
                                 @else
                                     <img class="object-cover object-center h-20 w-36"
-                                        src="https://cdn.pixabay.com/photo/2017/04/16/18/08/test-tube-2235388_960_720.png"
+                                        src="https://cdn.pixabay.com/photo/2017/10/11/14/41/agriculture-2841234_960_720.jpg"
                                         alt="{{ $relatedPost->name }}">
                                 @endif
 
