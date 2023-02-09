@@ -81,7 +81,7 @@
 
     <div class="col">
         <div class="form-group">
-            {!! Form::label('file', 'imagem que se mostraré en el post') !!}
+            {!! Form::label('file', 'imagen que se mostraré en el post') !!}
             {!! Form::file('file', ['class' => 'form-control-file', 'accept' => 'image/*']) !!}
 
             @error('file')
