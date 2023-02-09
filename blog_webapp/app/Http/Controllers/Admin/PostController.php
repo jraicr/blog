@@ -10,7 +10,7 @@ use App\Models\Tag;
 
 use Illuminate\Support\Facades\Storage;
 
-use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -40,10 +40,10 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(PostRequest $request)
     {
 
         $post = Post::create($request->all());
@@ -55,8 +55,6 @@ class PostController extends Controller
                 'url' => $url
             ]);
         }
-
-
 
         if ($request->tags) {
             $post->tags()->attach($request->tags);
@@ -84,19 +82,45 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::pluck('name', 'id');
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PostRequest  $request
      * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->update($request->all());
+
+        if($request->file('file')) {
+            $url = Storage::put('posts', $request->file('file'));
+
+            if ($post->image) {
+                Storage::delete($post->image->url);
+
+                $post->image->update([
+                    'url' => $url
+                ]);
+
+            } else {
+                $post->image()->create([
+                    'url' => $url
+                ]);
+            }
+        }
+
+        if ($request->tags) {
+            $post->tags()->attach($request->tags);
+        }
+
+        return redirect()->route('admin.posts.edit', $post)->with('info', 'El post se actualizó con éxito');
     }
 
     /**
