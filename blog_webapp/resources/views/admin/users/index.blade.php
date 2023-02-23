@@ -3,11 +3,11 @@
 @section('title', 'Code Rai')
 
 @section('content_header')
-    <h1>Mostrar detalle de categoría</h1>
+    <h1>Lista de usuarios</h1>
 @stop
 
 @section('content')
-    <p>Bienvenido al panel de control del administrador.</p>
+    @livewire('admin.users-index')
 @stop
 
 @section('css')

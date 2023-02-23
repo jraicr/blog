@@ -28,7 +28,10 @@ class DatabaseSeeder extends Seeder
 
         Storage::deleteDirectory('posts');
         Storage::makeDirectory('posts');
+
         //File::makeDirectory("storage/app/public/posts", 0755, true, true);
+
+        $this->call(RoleSeeder::class);
 
         $this->call(UserSeeder::class);
         Category::factory(4)->create();
